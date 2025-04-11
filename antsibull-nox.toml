@@ -1,0 +1,16 @@
+[sessions]
+
+[sessions.lint]
+run_isort = false
+run_pylint = false
+run_yamllint = false
+run_mypy = false
+run_antsibullnox_config_lint = false
+run_flake8 = false
+include_devel = true
+run_black = false
+
+[sessions.ansible_test_sanity]
+include_devel = true
+
+[sessions.ansible_lint]

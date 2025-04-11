@@ -7,4 +7,4 @@
         name: python-libs
         state: latest
       tags:
-        - skip_ansible_lint  # ANSIBLE0010
+        - skip_ansible_lint # ANSIBLE0010

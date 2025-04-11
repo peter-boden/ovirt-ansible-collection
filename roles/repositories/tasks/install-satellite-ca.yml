@@ -17,12 +17,13 @@
   when: not ovirt_repositories_fips_enabled
 
 - name: Install Satellite certificates with FIPS block
+  when: ovirt_repositories_fips_enabled
   block:
     - name: Download Satellite certificate rpm
       ansible.builtin.get_url:
         url: "{{ ovirt_repositories_ca_rpm_url }}"
         dest: /tmp/sat_ca.rpm
-        mode: '0644'
+        mode: "0644"
         validate_certs: "{{ ovirt_repositories_ca_rpm_validate_certs | default(omit) }}"
 
     - name: Install Satellite certificates with FIPS
@@ -33,4 +34,3 @@
       ansible.builtin.file:
         path: /tmp/sat_ca.rpm
         state: absent
-  when: ovirt_repositories_fips_enabled

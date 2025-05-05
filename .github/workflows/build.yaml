@@ -102,4 +102,3 @@ jobs:
         uses: ovirt/upload-rpms-action@main
         with:
           directory: exported-artifacts
-

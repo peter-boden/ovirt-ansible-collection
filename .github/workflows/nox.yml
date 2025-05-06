@@ -1,0 +1,30 @@
+name: nox
+'on':
+  push:
+    branches:
+      - main
+      - stable-*
+  pull_request:
+  # Run CI once per day (at 04:30 UTC)
+  schedule:
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  nox:
+    runs-on: ubuntu-latest
+    name: "Run extra sanity tests"
+    steps:
+      - name: Check out collection
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+    - name: Build the project
+      run: ./build.sh build ovirt /tmp
+
+  ansible-test:
+    uses: ansible-community/antsibull-nox/.github/workflows/reusable-nox-matrix.yml@main
+    working-directory: /tmp/ansible_collections/ovirt/ovirt
+    with:
+      upload-codecov: false
+    

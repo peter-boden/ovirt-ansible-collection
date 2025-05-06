@@ -1,0 +1,16 @@
+
+[sessions]
+
+[sessions.lint]
+# disable reformatting for now
+run_isort = false
+
+# disable reformatting for now
+run_black = false
+
+# Add more configuration settings here to adjust to your collection;
+# see https://ansible.readthedocs.io/projects/antsibull-nox/config-file/#basic-linting-sessions
+
+[sessions.docs_check]
+# Add configuration settings here to adjust to your collection;
+# see https://ansible.readthedocs.io/projects/antsibull-nox/config-file/#collection-documentation-check

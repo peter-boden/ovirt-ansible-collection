@@ -24,7 +24,7 @@ jobs:
 
   ansible-test:
     uses: ansible-community/antsibull-nox/.github/workflows/reusable-nox-matrix.yml@main
-    working-directory: /tmp/ansible_collections/ovirt/ovirt
     with:
       upload-codecov: false
+      working-directory: /tmp/ansible_collections/ovirt/ovirt
     

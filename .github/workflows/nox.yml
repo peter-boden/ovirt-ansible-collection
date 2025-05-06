@@ -20,7 +20,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Build the project
-        run: ./build.sh build ovirt /tmp
+        run: ./build.sh build ovirt /tmp;cp -rf /tmp/ansible_collections/ovirt/ovirt/* .
 
   ansible-test:
     uses: ansible-community/antsibull-nox/.github/workflows/reusable-nox-matrix.yml@main

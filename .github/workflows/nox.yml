@@ -1,5 +1,5 @@
 name: nox
-'on':
+on:
   push:
     branches:
       - master
@@ -19,8 +19,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-    - name: Build the project
-      run: ./build.sh build ovirt /tmp
+      - name: Build the project
+        run:./build.sh build ovirt /tmp
 
   ansible-test:
     uses: ansible-community/antsibull-nox/.github/workflows/reusable-nox-matrix.yml@main

@@ -1,4 +1,3 @@
-
 [sessions]
 
 [sessions.lint]
@@ -14,3 +13,13 @@ run_black = false
 [sessions.docs_check]
 # Add configuration settings here to adjust to your collection;
 # see https://ansible.readthedocs.io/projects/antsibull-nox/config-file/#collection-documentation-check
+
+[sessions.ansible]
+ansible = [
+  "stable-2.14",
+  "stable-2.15",
+  "stable-2.16",
+  "stable-2.17",
+  "stable-2.18",
+  "devel"
+]

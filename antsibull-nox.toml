@@ -6,7 +6,7 @@ run_isort = false
 run_pylint = false
 run_yamllint = false
 run_mypy = false
-run_antsibullnox_config_lint
+run_antsibullnox_config_lint = false
 include_devel = true
 
 # disable reformatting for now

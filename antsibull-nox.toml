@@ -19,4 +19,3 @@ run_black = false
 include_devel = true
 
 [sessions.ansible_lint]
-include_devel = true

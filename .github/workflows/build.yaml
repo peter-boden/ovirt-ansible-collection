@@ -15,59 +15,21 @@ on:
   schedule:
     - cron: '0 6 * * *'
 
-concurrency:
-  group: >-
-    ${{ github.workflow }}-${{
-      github.event.pull_request.number || github.sha
-    }}
-  cancel-in-progress: true
-
 jobs:
   lint:
-    name: Lint
     runs-on: ubuntu-latest
+    name: "Run ansible-lint"
     steps:
-      - name: Checkout
-        uses: ovirt/checkout-action@main
-      - name: Build the project
-        run: ./build.sh build ovirt /tmp;cp -rf /tmp/ansible_collections/ovirt/ovirt/* .
-      - name: Run ansible lint
-        uses: ansible/ansible-lint@v25
+      - name: Check out collection
+        uses: actions/checkout@v4
         with:
-          args: "-x 'key-order[task],no-free-form,schema[vars],yaml[octal-values],risky-shell-pipe,fqcn[keyword]' roles/*"
-          requirements_file: "meta/requirements.yml"
-
+          persist-credentials: false
+      - name: Run nox
+        uses: ansible-community/antsibull-nox@main
   sanity:
-    name: Sanity (Ⓐ${{ matrix.ansible }})
-    needs:
-      - lint
-    strategy:
-      matrix:
-        ansible:
-          - stable-2.14
-          - stable-2.15
-          - stable-2.16
-          - stable-2.17
-          - stable-2.18
-          - devel
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: ovirt/checkout-action@main
-
-      - name: Build the project
-        run: ./build.sh build ovirt /tmp
-
-      - name: Perform sanity testing
-        uses: ansible-community/ansible-test-gh-action@release/v1
-        with:
-          ansible-core-version: ${{ matrix.ansible }}
-          testing-type: sanity
-          pull-request-change-detection: false
-          test-deps:
-            ansible.posix
-          collection-src-directory: /tmp/ansible_collections/ovirt/ovirt
+    uses: ansible-community/antsibull-nox/.github/workflows/reusable-nox-matrix.yml@main
+    with:
+      upload-codecov: false
 
   build:
     name: Build for ${{ matrix.name }}

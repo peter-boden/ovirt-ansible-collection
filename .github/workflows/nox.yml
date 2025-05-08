@@ -11,7 +11,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  ansible-test:
+  lint:
+    runs-on: ubuntu-latest
+    name: "Run ansible-lint"
+    steps:
+      - name: Check out collection
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run nox
+        uses: ansible-community/antsibull-nox@main
+  sanity:
     uses: ansible-community/antsibull-nox/.github/workflows/reusable-nox-matrix.yml@main
     with:
       upload-codecov: false

@@ -48,11 +48,6 @@ install() {
   echo "Installation done."
 }
 
-rename() {
-  echo "Renaming @NAMESPACE@ to $COLLECTION_NAMESPACE and @NAME@ to $COLLECTION_NAME"
-  find ./* -type f -exec sed -i -e "s/@NAMESPACE@/$COLLECTION_NAMESPACE/g" -e "s/@NAME@/$COLLECTION_NAME/g" {} \;
-}
-
 build() {
   if [[ $BUILD_PATH ]]; then
     BUILD_PATH="$BUILD_PATH/ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME/"
@@ -61,7 +56,6 @@ build() {
     git config --global --add safe.directory "$(pwd)"
     git archive --format=tar HEAD | (cd "$BUILD_PATH" && tar xf -)
     cd "$BUILD_PATH"
-    rename
     dist
   fi
 }

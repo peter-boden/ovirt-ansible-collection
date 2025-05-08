@@ -1,4 +1,3 @@
-build.sh shebang
 .automation/build.sh shebang
 plugins/callback/stdout.py shebang
 roles/disaster_recovery/files/fail_back.py shebang
